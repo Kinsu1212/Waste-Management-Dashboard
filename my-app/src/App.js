@@ -148,7 +148,7 @@ const countydata5 = [
 ];
 
 export const pieChartOptions = {
-  title: "Agency Wise Waste Disposal",
+  // title: "",
   // title: {
   //   display: true,
   //   text: "Agency Wise Waste Disposal",
@@ -183,16 +183,17 @@ const lineChartData1 = [
   69909.0, 124761.66, 39542.07, 144909.72, 129726.26, 143704.51,
 ];
 const lineChartData2 = [
-  80000.0, 130000.0, 45000.0, 150000.0, 135000.0, 150000.0,
+  124227, 125358.7, 7321.03, 26166.48, 47726.86, 95523.76,
 ];
 const lineChartData3 = [
-  75000.0, 127000.0, 42000.0, 147000.0, 132000.0, 148000.0,
+  43180.33, 32028.88, 38133.33, 23036.44, 26523.87, 34562.92,
 ];
 const lineChartData4 = [
-  70000.0, 125000.0, 40000.0, 145000.0, 130000.0, 145000.0,
+  13901, 34220, 1889.54, 5873, 4575, 8753.39,
+
 ];
 const lineChartData5 = [
-  72000.0, 128000.0, 43000.0, 149000.0, 134000.0, 147000.0,
+  31384, 12444.77, 20235.08, 20398.48, 46258.98, 35847.76,
 ];
 
 function App() {
@@ -200,6 +201,8 @@ function App() {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [pieChartData, setPieChartData] = useState(countydata1);
   const [lineChartData, setLineChartData] = useState(lineChartInfo);
+  const topFiveStateNames = ["Los Angeles","San Diego","San Bernardino","Orange","Yuba"];
+  const [stateName, setStateName] = useState(topFiveStateNames[0])
 
   const handleMouseEnter = (county, pieData, lineData) => {
     setHoveredCounty(county);
@@ -288,14 +291,14 @@ function App() {
       legend: {
         position: "center",
       },
-      title: {
-        display: true,
-        text: "Waste Disposal Rates Over Years",
-        color: "black",
-        font: {
-          size: 19, // Increase the font size of the title
-        },
-      },
+      // title: {
+      //   display: true,
+      //   text: "",
+      //   color: "black",
+      //   font: {
+      //     size: 19, // Increase the font size of the title
+      //   },
+      // },
     },
     scales: {
       x: {
@@ -332,13 +335,17 @@ function App() {
         <div className="grid-element-one">
           {hoveredCounty == "info" ?
             <PolarChart /> :
+            <div style={{position:"relative", display:"flex", justifyContent:"center"}}>
+            <h5 style={{textAlign:"center", position:"absolute", zIndex:"1"}}>Agency Wise Waste Disposal for<br /> {stateName}</h5>
             <Chart
               chartType="PieChart"
               data={pieChartData}
               options={pieChartOptions}
               width={"100%"}
-              height={"400px"}
+              height={"350px"}
             />
+            </div>
+            
           }
         </div>
         <div className="grid-element-two">
@@ -363,8 +370,10 @@ function App() {
             </div>
             <div
               className="para-hover"
-              onMouseEnter={() =>
-                handleMouseEnter("County1", countydata1, lineChartData1)
+              onMouseEnter={() => {
+                handleMouseEnter("County1", countydata1, lineChartData1);
+                setStateName(topFiveStateNames[0]);
+              }
               }
             // onMouseLeave={handleMouseLeave}
             // onClick={() =>
@@ -393,8 +402,10 @@ function App() {
             </div>
             <div
               className="para-hover"
-              onMouseEnter={() =>
-                handleMouseEnter("County2", countydata2, lineChartData2)
+              onMouseEnter={() => {
+                handleMouseEnter("County2", countydata2, lineChartData2);
+                setStateName(topFiveStateNames[1]);
+              }
               }
             // onMouseLeave={handleMouseLeave}
             // onClick={() =>
@@ -423,8 +434,10 @@ function App() {
             </div>
             <div
               className="para-hover"
-              onMouseEnter={() =>
-                handleMouseEnter("County3", countydata3, lineChartData3)
+              onMouseEnter={() => {
+                handleMouseEnter("County3", countydata3, lineChartData3);
+                setStateName(topFiveStateNames[2]);
+              }
               }
             // onMouseLeave={handleMouseLeave}
             // onClick={() =>
@@ -453,8 +466,10 @@ function App() {
             </div>
             <div
               className="para-hover"
-              onMouseEnter={() =>
-                handleMouseEnter("County4", countydata4, lineChartData4)
+              onMouseEnter={() => {
+                handleMouseEnter("County4", countydata4, lineChartData4);
+                setStateName(topFiveStateNames[3]);
+              }
               }
             // onMouseLeave={handleMouseLeave}
             // onClick={() =>
@@ -483,8 +498,10 @@ function App() {
             </div>
             <div
               className="para-hover"
-              onMouseEnter={() =>
-                handleMouseEnter("County5", countydata5, lineChartData5)
+              onMouseEnter={() => {
+                handleMouseEnter("County5", countydata5, lineChartData5);
+                setStateName(topFiveStateNames[4]);
+              }
               }
             // onMouseLeave={handleMouseLeave}
             // onClick={() =>
@@ -514,6 +531,7 @@ function App() {
           </div>
         </div>
         <div className="grid-element-one">
+          <h5 style={{textAlign:"center"}}>Waste Disposal Rates Over Years <br /> for Caltrans</h5>
           <LineChartComponent />
         </div>
       </div>

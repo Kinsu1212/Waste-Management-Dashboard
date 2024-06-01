@@ -11,11 +11,11 @@ const data = {
       label: 'Disposal Tons',
       data: [0.12, 1.04, 0.09, 0.2, 0.2, 0.39, 0.18],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(255, 205, 86, 0.5)',
-        'rgba(201, 203, 207, 0.5)',
-        'rgba(54, 162, 235, 0.5)',
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(255, 205, 86, 0.7)',
+        'rgba(201, 203, 207, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
       ],
       borderColor: [
         'rgb(255, 99, 132)',
@@ -50,7 +50,7 @@ const options = {
 function PolarChart() {
   return (
     <div style={{ width: '300px', height: '300px' }}>
-        <h5 style={{marginLeft: '50px', fontWeight: 'bold',textAlign:'center'}}>Total Waste over Agency Types</h5>
+        <h5 style={{marginLeft: '50px',textAlign:'center'}}>Total Waste over Agency Types</h5>
       <PolarArea data={data} options={options} />
     </div>
   );
