@@ -5,11 +5,11 @@ import { Chart as ChartJS, RadialLinearScale, ArcElement, Tooltip, Legend } from
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
 const data = {
-  labels: ['CSU', 'Caltrans', 'Community College', 'Fair', 'Park', 'Veteran', 'Correctional'],
+  labels: ['CSU', 'Caltrans', 'Community College', 'Fair', 'Park', 'Veteran', 'Correctional','GSA'],
   datasets: [
     {
       label: 'Disposal Tons',
-      data: [0.12, 1.04, 0.09, 0.2, 0.2, 0.39, 0.18],
+      data: [0.12, 1.04, 0.09, 0.2, 0.2, 0.39, 0.18, 0.11],
       backgroundColor: [
         'rgba(255, 99, 132, 0.7)',
         'rgba(75, 192, 192, 0.7)',

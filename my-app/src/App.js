@@ -34,7 +34,6 @@ ChartJS.register(
   LineElement
 );
 
-
 const dataPoints = [
   { Countyname: "Los Angeles", DisposalTons: 437629.86 },
   { Countyname: "San Diego", DisposalTons: 314124.04 },
@@ -203,6 +202,7 @@ function App() {
   const [lineChartData, setLineChartData] = useState(lineChartInfo);
   const topFiveStateNames = ["Los Angeles","San Diego","San Bernardino","Orange","Yuba"];
   const [stateName, setStateName] = useState(topFiveStateNames[0])
+  const [highlightBarCounty, setHighlightBarCounty] = useState(null)
 
   const handleMouseEnter = (county, pieData, lineData) => {
     setHoveredCounty(county);
@@ -315,9 +315,6 @@ function App() {
       },
     },
   };
-
-
-
   return (
     <div style={{ paddingLeft: "20px", paddingRight: "30px" }}>
       <Row>
@@ -325,8 +322,8 @@ function App() {
           <div className="d-flex justify-content-center">
 
           </div>
-          <div style={{ width: "100%", height: "450px", alignContent: "center", justifyContent: "center", display: "flex" }}>
-            <BarChart />
+          <div style={{ width: "100%", height: "300px", alignContent: "center", justifyContent: "center", display: "flex" }}>
+            <BarChart stateName={highlightBarCounty} />
           </div>
         </Col>
       </Row>
@@ -349,12 +346,13 @@ function App() {
           }
         </div>
         <div className="grid-element-two">
-          <div style={{ overflowY: "scroll", height: "300px", paddingRight: "15px" }}>
+          <div style={{ overflowY: "scroll", height: "480px", paddingRight: "15px" }}>
             <div
               className="para-hover"
               onMouseEnter={() => {
                 setHoveredCounty("info");
                 handleMouseEnter("info", null, lineChartInfo);
+                setHighlightBarCounty(null);
               }
               }
             // onMouseLeave={handleMouseLeave}
@@ -363,9 +361,9 @@ function App() {
             // }
             >
               <p>
-                Welcome to the County Waste Management Dashboard, <br />a comprehensive tool designed to provide detailed insights into waste disposal activities across various counties and agencies. This dashboard features interactive visualizations that allow you to explore and compare waste disposal volumes by county, understand the distribution of waste among different agency types, and track annual disposal trends. Our goal is to present clear and concise data to help stakeholders make informed decisions and implement effective waste management strategies.
+              <strong>Welcome to the CountyWise Waste Management Dashboard,</strong> <br /> <br />a comprehensive tool designed to provide detailed insights into waste disposal activities across various counties and agencies. This dashboard features interactive visualizations that allow you to explore and compare waste disposal volumes by county, understand the distribution of waste among different agency types, and track annual disposal trends. Our goal is to present clear and concise data to help stakeholders make informed decisions and implement effective waste management strategies.
 
-                <br /><br />With our dashboard, you can easily analyze the total waste managed by different agencies, from community colleges to correctional facilities, and see how each contributes to the overall waste landscape. The visual data representation helps identify patterns and trends over the years, offering a valuable perspective on the progress and areas needing improvement in waste disposal. We aim to support sustainable waste management practices that benefit our communities and the environment.
+                <br /><br />With our dashboard, you can easily analyze the total waste managed by different agencies, from community colleges to correctional facilities, and see how each contributes to the overall waste landscape. The visual data representation helps identify patterns and trends over the years, offering a valuable perspective on the progress and areas needing improvement in waste disposal. We aim to support sustainable waste management practices that benefit our communities and the environment.<br /><br />
               </p>
             </div>
             <div
@@ -373,6 +371,7 @@ function App() {
               onMouseEnter={() => {
                 handleMouseEnter("County1", countydata1, lineChartData1);
                 setStateName(topFiveStateNames[0]);
+                setHighlightBarCounty(topFiveStateNames[0]);
               }
               }
             // onMouseLeave={handleMouseLeave}
@@ -381,23 +380,9 @@ function App() {
             // }
             >
               <p>
-                County1{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
+              <strong>Agency Wise Waste Disposal for Los Angeles:</strong> <br /> <br />
+                The pie chart shows waste disposal by various agencies in Los Angeles, with Community Colleges contributing the most at 86.6%. Other notable contributors include California State University, CalTrans, Correctional facilities, and Parks. This helps identify key areas for targeted waste management. <br /> <br /> 
+                The line chart tracks CalTrans waste disposal from 2011 to 2016, highlighting predicted data for 2015 and 2016. The chart shows a peak in 2014, a dip in 2015, and recovery in 2016. Predicted values in red indicate expected stabilization in waste management efforts.<br /> <br /> 
               </p>
             </div>
             <div
@@ -405,6 +390,7 @@ function App() {
               onMouseEnter={() => {
                 handleMouseEnter("County2", countydata2, lineChartData2);
                 setStateName(topFiveStateNames[1]);
+                setHighlightBarCounty(topFiveStateNames[1]);
               }
               }
             // onMouseLeave={handleMouseLeave}
@@ -413,23 +399,10 @@ function App() {
             // }
             >
               <p>
-                County2{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
+                <strong>Agency Wise Waste Disposal for San Diego:</strong><br /><br />
+                The pie chart illustrates waste disposal distribution among various agencies in San Diego, with Community Colleges being the largest contributor at 90.1%. Other agencies, such as Correctional facilities, Parks, and the California State University system, contribute smaller portions. This distribution helps highlight key areas for targeted waste management initiatives in San Diego.< br/>< br/>
+
+                The line chart tracks waste disposal trends for CalTrans from 2011 to 2016, with predicted data for 2015 and 2016 highlighted in red. The chart shows a peak in 2012, a significant dip in 2013, and recovery in 2016. The predicted values show an increase in total waste, implying that more waste management efforts are necessary to effectively tackle this rise.<br /><br />
               </p>
             </div>
             <div
@@ -437,6 +410,7 @@ function App() {
               onMouseEnter={() => {
                 handleMouseEnter("County3", countydata3, lineChartData3);
                 setStateName(topFiveStateNames[2]);
+                setHighlightBarCounty(topFiveStateNames[2]);
               }
               }
             // onMouseLeave={handleMouseLeave}
@@ -445,23 +419,9 @@ function App() {
             // }
             >
               <p>
-                County3{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
+                <strong>Agency Wise Waste Disposal for San Bernardino:</strong><br /><br />
+                The pie chart illustrates waste disposal distribution among various agencies in San Bernardino, with Community Colleges being the largest contributor at 79.2%. Other agencies, such as Correctional facilities and the California State University system, also contribute significant portions, with Correctional facilities accounting for 12.3%. This distribution helps highlight key areas for targeted waste management initiatives in San Bernardino.< br/><br/>
+                The line chart tracks waste disposal trends for CalTrans from 2011 to 2016, with predicted data for 2015 and 2016 highlighted in red. The chart shows a peak in 2012, a dip in 2013, and a recovery in 2016. The predicted values indicate a rise in total waste, suggesting that waste management efforts need to be intensified to address this increase effectively.< br/><br/>
               </p>
             </div>
             <div
@@ -469,6 +429,7 @@ function App() {
               onMouseEnter={() => {
                 handleMouseEnter("County4", countydata4, lineChartData4);
                 setStateName(topFiveStateNames[3]);
+                setHighlightBarCounty(topFiveStateNames[3]);
               }
               }
             // onMouseLeave={handleMouseLeave}
@@ -477,23 +438,9 @@ function App() {
             // }
             >
               <p>
-                County4{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
+                <strong>Agency Wise Waste Disposal for Orange:</strong><br /><br />
+                The pie chart illustrates waste disposal distribution among various agencies in Orange County, with Community Colleges being the largest contributor at 56.3%. Other agencies, such as the California State University system and General State Agencies, also contribute significant portions, with 18.5% and other minor categories. This distribution helps highlight key areas for targeted waste management initiatives in Orange County.<br/><br/>
+                The line chart tracks waste disposal trends for CalTrans from 2011 to 2016, with predicted data for 2015 and 2016 highlighted in red. The chart shows a peak in 2012, a significant dip in 2013, and slight recovery in 2016. The predicted values suggest stabilization in waste management efforts, indicating an improved approach to handling waste disposal by CalTrans.<br/><br/>
               </p>
             </div>
             <div
@@ -501,6 +448,7 @@ function App() {
               onMouseEnter={() => {
                 handleMouseEnter("County5", countydata5, lineChartData5);
                 setStateName(topFiveStateNames[4]);
+                setHighlightBarCounty(topFiveStateNames[4]);
               }
               }
             // onMouseLeave={handleMouseLeave}
@@ -509,29 +457,15 @@ function App() {
             // }
             >
               <p>
-                County5{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
-                ksjdhjksh skdjhfsdjkfh skjdhnjksdhds cksdjhnskdjhcd
-                kjsdchdsjkcjksdch ksjdchsjdkhcjkdsksdjchsdk chjksdchks{" "}
+                <strong>Agency Wise Waste Disposal for Yuba:</strong><br /><br />
+                The pie chart illustrates waste disposal distribution among various agencies in Yuba County, with CalTrans being the overwhelming contributor at 99.1%. Community Colleges also contributes a minor portion. This distribution helps highlight the primary area for targeted waste management initiatives in Yuba County.<br/><br/>
+                The line chart tracks waste disposal trends for CalTrans from 2011 to 2016, with predicted data for 2015 and 2016 highlighted in red. The chart shows a peak in 2015, a dip in 2013, and a recovery in 2016. The predicted values suggest stabilization in waste management efforts, indicating an improved approach to handling waste disposal by CalTrans.<br/><br/>
               </p>
             </div>
           </div>
         </div>
         <div className="grid-element-one">
-          <h5 style={{textAlign:"center"}}>Waste Disposal Rates Over Years <br /> for Caltrans</h5>
+          <h5 style={{textAlign:"center"}}>Waste Disposal Rates Over Years <br /> {hoveredCounty == "info" ? "" : "for Caltrans"} </h5>
           <LineChartComponent />
         </div>
       </div>
