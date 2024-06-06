@@ -110,7 +110,7 @@ function BarChart({stateName}) {
       labels: false,
       elements: {
         bar: {
-          borderWidth: 0.7,
+          borderWidth: 0.6,
           backgroundColor: "blue",
         },
       },
